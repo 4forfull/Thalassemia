@@ -5,6 +5,9 @@ from PIL import Image
 import pandas as pd
 from catboost import CatBoostClassifier
 
+# Set Page Title
+st.set_page_config(page_title="Thalassemia")
+
 # Load Model
 model = CatBoostClassifier()
 model.load_model('./catboost_model_smote_thalassemia.cbm')
