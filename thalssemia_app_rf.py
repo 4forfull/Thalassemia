@@ -2,32 +2,20 @@
 import streamlit as st
 from PIL import Image
 import pandas as pd
-import pickle  # 新增
-# 或者用 joblib
-# import joblib
+import pickle
 
-# Set Page Title
 st.set_page_config(page_title="Thalassemia")
 
-# ===== Load Models (.pkl) =====
 with open('RF_model_YN.pkl', 'rb') as f:
     model = pickle.load(f)
 
 with open('RF_model_ab.pkl', 'rb') as f:
     model1 = pickle.load(f)
 
-# 如果模型是 joblib 保存的：
-# model = joblib.load('.../catboost_model_smote_YN.pkl')
-# model1 = joblib.load('.../catboost_model_smote_ab.pkl')
+df_main = pd.read_csv('test.csv')
 
-# ===== Load Dataset =====
-df_main = pd.read_csv('D:/临床病例/地贫最终数据/软件/test.csv')
-
-# ===== Load Image =====
 image = Image.open('img.jpg')
 
-
-# Streamlit Function For Building Button & app.
 def main():
     st.image(image)
 
@@ -50,7 +38,6 @@ def main():
             unsafe_allow_html=True)
 
 
-# Prediction Function
 def prediction(input_data):
     test = [input_data]
     predict = model.predict(test)
@@ -66,3 +53,4 @@ def prediction(input_data):
 
 if __name__ == '__main__':
     main()
+
