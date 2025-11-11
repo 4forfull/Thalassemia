@@ -2,15 +2,13 @@
 import streamlit as st
 from PIL import Image
 import pandas as pd
-import pickle
+import joblib
 
+# Set Page Title
 st.set_page_config(page_title="Thalassemia")
 
-with open('RF_model_YN.pkl', 'rb') as f:
-    model = pickle.load(f)
-
-with open('RF_model_ab.pkl', 'rb') as f:
-    model1 = pickle.load(f)
+model = joblib.load('RF_model_YN.pkl')
+model1 = joblib.load('RF_model_ab.pkl')
 
 df_main = pd.read_csv('test.csv')
 
@@ -53,4 +51,5 @@ def prediction(input_data):
 
 if __name__ == '__main__':
     main()
+
 
